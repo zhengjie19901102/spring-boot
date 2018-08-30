@@ -26,8 +26,6 @@
 
 ## 3、环境准备
 
-http://www.gulixueyuan.com/ 谷粒学院
-
 环境约束
 
 –jdk1.8：Spring Boot 推荐jdk1.7及以上；java version "1.8.0_112"
@@ -235,9 +233,9 @@ public @interface SpringBootApplication {
 @**SpringBootConfiguration**:Spring Boot的配置类；
 
 		标注在某个类上，表示这是一个Spring Boot的配置类；
-
+	
 		@**Configuration**:配置类上来标注这个注解；
-
+	
 			配置类 -----  配置文件；配置类也是容器中的一个组件；@Component
 
 
@@ -253,21 +251,21 @@ public @interface EnableAutoConfiguration {
 ```
 
       	@**AutoConfigurationPackage**：自动配置包
-
-		@**Import**(AutoConfigurationPackages.Registrar.class)：
-
-		Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
+    
+    	@**Import**(AutoConfigurationPackages.Registrar.class)：
+    
+    	Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
 
 ==将主配置类（@SpringBootApplication标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器；==
 
 	@**Import**(EnableAutoConfigurationImportSelector.class)；
-
+	
 		给容器中导入组件？
-
+	
 		**EnableAutoConfigurationImportSelector**：导入哪些组件的选择器；
-
+	
 		将所有需要导入的组件以全类名的方式返回；这些组件就会被添加到容器中；
-
+	
 		会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件；		![自动配置类](images/搜狗截图20180129224104.png)
 
 有了自动配置类，免去了我们手动编写配置注入功能组件等的工作；
@@ -331,15 +329,15 @@ SpringBoot使用一个全局的配置文件，配置文件名是固定的；
 YAML（YAML Ain't Markup Language）
 
 	YAML  A Markup Language：是一个标记语言
-
+	
 	YAML   isn't Markup Language：不是一个标记语言；
 
 标记语言：
 
 	以前的配置文件；大多都使用的是  **xxxx.xml**文件；
-
+	
 	YAML：**以数据为中心**，比json、xml等更适合做配置文件；
-
+	
 	YAML：配置例子
 
 ```yaml
@@ -380,15 +378,15 @@ server:
 #### 字面量：普通的值（数字，字符串，布尔）
 
 	k: v：字面直接来写；
-
+	
 		字符串默认不用加上单引号或者双引号；
-
+	
 		""：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思
-
+	
 				name:   "zhangsan \n lisi"：输出；zhangsan 换行  lisi
-
+	
 		''：单引号；会转义特殊字符，特殊字符最终只是一个普通的字符串数据
-
+	
 				name:   ‘zhangsan \n lisi’：输出；zhangsan \n  lisi
 
 
@@ -396,7 +394,7 @@ server:
 #### 对象、Map（属性和值）（键值对）：
 
 	k: v：在下一行来写对象的属性和值的关系；注意缩进
-
+	
 		对象还是k: v的方式
 
 ```yaml
@@ -705,15 +703,15 @@ spring:
 ### 3、激活指定profile
 
 	1、在配置文件中指定  spring.profiles.active=dev
-
+	
 	2、命令行：
-
+	
 		java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev；
-
+	
 		可以直接在测试的时候，配置传入命令行参数
-
+	
 	3、虚拟机参数；
-
+	
 		-Dspring.profiles.active=dev
 
 
@@ -988,11 +986,11 @@ public class HttpEncodingProperties {
 **精髓：**
 
 	**1）、SpringBoot启动会加载大量的自动配置类**
-
+	
 	**2）、我们看我们需要的功能有没有SpringBoot默认写好的自动配置类；**
-
+	
 	**3）、我们再来看这个自动配置类中到底配置了哪些组件；（只要我们要用的组件有，我们就不需要再来配置了）**
-
+	
 	**4）、给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们就可以在配置文件中指定这些属性的值；**
 
 
@@ -1072,17 +1070,17 @@ Negative matches:（没有启动，没有匹配成功的自动配置类）
  小张；开发一个大型系统；
 
 		1、System.out.println("")；将关键数据打印在控制台；去掉？写在一个文件？
-
+	
 		2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar；
-
+	
 		3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？
-
+	
 		4、将以前框架卸下来？换上新的框架，重新修改之前相关的API；zhanglogging-prefect.jar；
-
+	
 		5、JDBC---数据库驱动；
-
+	
 			写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；
-
+	
 			给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；
 
 
@@ -1180,9 +1178,9 @@ SpringBoot使用它来做日志功能；
 总结：
 
 	1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录
-
+	
 	2）、SpringBoot也把其他的日志都替换成了slf4j；
-
+	
 	3）、中间替换包？
 
 ```java
@@ -1199,7 +1197,7 @@ public abstract class LogFactory {
 
 
 	4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
-
+	
 			Spring框架用的是commons-logging；
 
 ```xml
@@ -1795,7 +1793,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 原理：
 
 	1）、WebMvcAutoConfiguration是SpringMVC的自动配置类
-
+	
 	2）、在做其他自动配置时会导入；@Import(**EnableWebMvcConfiguration**.class)
 
 ```java
@@ -1820,9 +1818,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 ```
 
 	3）、容器中所有的WebMvcConfigurer都会一起起作用；
-
+	
 	4）、我们的配置类也会被调用；
-
+	
 	效果：SpringMVC的自动配置和我们的扩展配置都会起作用；
 
 ### 3、全面接管SpringMVC；
@@ -1890,9 +1888,9 @@ public class WebMvcAutoConfiguration {
 模式：
 
 	1）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；
-
+	
 	2）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置
-
+	
 	3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置
 
 ## 6、RestfulCRUD
@@ -2536,9 +2534,9 @@ public class BasicErrorController extends AbstractErrorController {
 
 
 	步骤：
-
+	
 		一但系统出现4xx或者5xx之类的错误；ErrorPageCustomizer就会生效（定制错误的响应规则）；就会来到/error请求；就会被**BasicErrorController**处理；
-
+	
 		1）响应页面；去哪个页面是由**DefaultErrorViewResolver**解析得到的；
 
 ```java
@@ -2560,25 +2558,25 @@ protected ModelAndView resolveErrorView(HttpServletRequest request,
 #### 	**1）、如何定制错误的页面；**
 
 			**1）、有模板引擎的情况下；error/状态码;** 【将错误页面命名为  错误状态码.html 放在模板引擎文件夹里面的 error文件夹下】，发生此状态码的错误就会来到  对应的页面；
-
+	
 			我们可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误，精确优先（优先寻找精确的状态码.html）；		
-
+	
 			页面能获取的信息；
-
+	
 				timestamp：时间戳
-
+	
 				status：状态码
-
+	
 				error：错误提示
-
+	
 				exception：异常对象
-
+	
 				message：异常消息
-
+	
 				errors：JSR303数据校验的错误都在这里
-
+	
 			2）、没有模板引擎（模板引擎找不到这个错误页面），静态资源文件夹下找；
-
+	
 			3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面；
 
 
@@ -2629,9 +2627,9 @@ public class MyExceptionHandler {
 出现错误以后，会来到/error请求，会被BasicErrorController处理，响应出去可以获取的数据是由getErrorAttributes得到的（是AbstractErrorController（ErrorController）规定的方法）；
 
 	1、完全来编写一个ErrorController的实现类【或者是编写AbstractErrorController的子类】，放在容器中；
-
+	
 	2、页面上能用的数据，或者是json返回能用的数据都是通过errorAttributes.getErrorAttributes得到；
-
+	
 			容器中DefaultErrorAttributes.getErrorAttributes()；默认进行数据处理的；
 
 自定义ErrorAttributes
@@ -3105,7 +3103,7 @@ EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFa
 嵌入式Servlet容器：应用打成可执行的jar
 
 		优点：简单、便携；
-
+	
 		缺点：默认不支持JSP、优化定制比较复杂（使用定制器【ServerProperties、自定义EmbeddedServletContainerCustomizer】，自己编写嵌入式Servlet容器的创建工厂【EmbeddedServletContainerFactory】）；
 
 
@@ -3157,9 +3155,9 @@ servlet3.0（Spring注解版）：
 规则：
 
 	1）、服务器启动（web应用启动）会创建当前web应用里面每一个jar包里面ServletContainerInitializer实例：
-
+	
 	2）、ServletContainerInitializer的实现放在jar包的META-INF/services文件夹下，有一个名为javax.servlet.ServletContainerInitializer的文件，内容就是ServletContainerInitializer的实现类的全类名
-
+	
 	3）、还可以使用@HandlesTypes，在应用启动的时候加载我们感兴趣的类；
 
 
@@ -3312,17 +3310,17 @@ docker容器(Container)：镜像启动后的实例称为一个容器；容器是
 #### 1）、安装linux虚拟机
 
 	1）、VMWare、VirtualBox（安装）；
-
+	
 	2）、导入虚拟机文件centos7-atguigu.ova；
-
+	
 	3）、双击启动linux虚拟机;使用  root/ 123456登陆
-
+	
 	4）、使用客户端连接linux服务器进行命令操作；
-
+	
 	5）、设置虚拟机网络；
-
+	
 		桥接网络===选好网卡====接入网线；
-
+	
 	6）、设置好网络以后使用命令重启虚拟机的网络
 
 ```shell
@@ -3508,7 +3506,7 @@ spring:
 效果：
 
 	默认是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；
-
+	
 	数据源的相关配置都在DataSourceProperties里面；
 
 自动配置原理：
@@ -3545,9 +3543,9 @@ static class Generic {
 4、**DataSourceInitializer：ApplicationListener**；
 
 	作用：
-
+	
 		1）、runSchemaScripts();运行建表语句；
-
+	
 		2）、runDataScripts();运行插入数据的sql语句；
 
 默认只需要将文件命名为：
@@ -3627,9 +3625,9 @@ public class DruidConfig {
 步骤：
 
 	1）、配置数据源相关属性（见上一节Druid）
-
+	
 	2）、给数据库建表
-
+	
 	3）、创建JavaBean
 
 ### 	4）、注解版
@@ -3965,7 +3963,7 @@ public class HelloCommandLineRunner implements CommandLineRunner {
 starter：
 
 	1、这个场景需要使用到的依赖是什么？
-
+	
 	2、如何编写自动配置
 
 ```java
